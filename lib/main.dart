@@ -3,6 +3,18 @@ import 'package:delay_pass/presentation/welcome_view/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// startup load time & build size:
+/// v.1.0 futter run --debug: 11s 
+/// v.1.0 flutter run --release: 6s 36M
+/// v.1.0 flutter build web:  31M
+/// v.1.0 flutter build web --debug:  41M
+/// v.1.0 flutter build web --release:  31M
+/// v.1.0 lutter build web --release --dart2js-optimization=O4:  31M
+/// after clean: futter build --debug: 7s
+/// after clean: futter build --release: 31M
+/// after clean: futter build --release --wasm: 33M
+/// 
+/// 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
