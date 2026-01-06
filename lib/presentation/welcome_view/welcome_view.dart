@@ -1,11 +1,11 @@
+import 'package:delay_pass/domain/domain_impl.dart';
 import 'package:delay_pass/domain/domain_interface.dart';
 import 'package:delay_pass/presentation/presentation_constants.dart';
-import 'package:encrypt/encrypt.dart';
+import 'package:encrypt/encrypt.dart' deferred as encrypt_lib;
 import 'package:flutter/material.dart';
 
-import '../../domain/domain_impl.dart';
 import '../../state_handler.dart';
-import '../generate_pass_hash_view/generation_view.dart';
+import '../generate_pass_hash_view/generation_view.dart' deferred as gen_view;
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -183,10 +183,15 @@ class _ActionButtons extends StatelessWidget {
             title: 'Generate New Password ${PresentationConstants.appVersion}',
             icon: Icons.add_moderator,
             color: colorScheme.primary,
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const GenerationView()),
-              );
+            onTap: () async {
+              await gen_view.loadLibrary();
+              if (context.mounted) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => gen_view.GenerationView(),
+                  ),
+                );
+              }
             },
           ),
           const SizedBox(height: 20),
@@ -238,10 +243,12 @@ class _ActionButtons extends StatelessWidget {
                             late StateHandler<DomainErrorStates, String>
                             passHandler;
 
+                            await encrypt_lib.loadLibrary();
+
                             try {
                               passHandler = await DomainInterface.impl()
                                   .getPassFromHash(
-                                    Encrypted.fromBase64(hashInput),
+                                    encrypt_lib.Encrypted.fromBase64(hashInput),
                                   )
                                   .onError((handleError, e) {
                                     return StateHandler(
