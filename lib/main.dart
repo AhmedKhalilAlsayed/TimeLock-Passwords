@@ -1,8 +1,7 @@
-import 'package:delay_pass/presentation/presentation_constants.dart';
-import 'package:delay_pass/presentation/welcome_view/welcome_view.dart';
+import 'package:TimeLockPassword/presentation/presentation_constants.dart';
+import 'package:TimeLockPassword/presentation/welcome_view/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

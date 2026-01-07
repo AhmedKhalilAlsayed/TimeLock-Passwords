@@ -1,6 +1,6 @@
-import 'package:delay_pass/domain/domain_impl.dart';
-import 'package:delay_pass/domain/domain_interface.dart';
-import 'package:delay_pass/presentation/presentation_constants.dart';
+import 'package:TimeLockPassword/domain/domain_impl.dart';
+import 'package:TimeLockPassword/domain/domain_interface.dart';
+import 'package:TimeLockPassword/presentation/presentation_constants.dart';
 import 'package:encrypt/encrypt.dart' deferred as encrypt_lib;
 import 'package:flutter/material.dart';
 

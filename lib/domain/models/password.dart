@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:delay_pass/state_handler.dart';
+import 'package:TimeLockPassword/state_handler.dart';
 
 enum PasswordErrorStates { success, shortLengthError, noTypeSelectedError }
 

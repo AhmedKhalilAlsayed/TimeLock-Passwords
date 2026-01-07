@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:delay_pass/domain/domain_constants.dart';
-import 'package:delay_pass/network/network_interface.dart';
-import 'package:delay_pass/state_handler.dart';
+import 'package:TimeLockPassword/domain/domain_constants.dart';
+import 'package:TimeLockPassword/network/network_interface.dart';
+import 'package:TimeLockPassword/state_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:ntp/ntp.dart';
 
