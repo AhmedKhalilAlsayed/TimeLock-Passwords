@@ -2,7 +2,10 @@ import 'package:TimeLockPassword/domain/domain_impl.dart';
 import 'package:TimeLockPassword/domain/domain_interface.dart';
 import 'package:TimeLockPassword/presentation/presentation_constants.dart';
 import 'package:encrypt/encrypt.dart' deferred as encrypt_lib;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../state_handler.dart';
 import '../generate_pass_hash_view/generation_view.dart' deferred as gen_view;
@@ -15,6 +18,13 @@ class WelcomeView extends StatefulWidget {
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
+  Future<void> _launchUrl(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url)) {
+      debugPrint('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -23,6 +33,39 @@ class _WelcomeViewState extends State<WelcomeView> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          if (kIsWeb) ...[
+            const Text(
+              'The platform versions are unlimited!',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 16),
+            IconButton(
+              onPressed: () => _launchUrl('https://www.microsoft.com'),
+              icon: SvgPicture.asset(
+                'assets/windows.svg',
+                width: 24,
+                height: 24,
+              ),
+            ),
+            IconButton(
+              onPressed: () => _launchUrl('https://www.linux.org'),
+              icon: SvgPicture.asset('assets/linux.svg', width: 24, height: 24),
+            ),
+            IconButton(
+              onPressed: () => _launchUrl('https://www.android.com'),
+              icon: SvgPicture.asset(
+                'assets/android.svg',
+                width: 24,
+                height: 24,
+              ),
+            ),
+          ] else
+            IconButton(
+              onPressed: () => _launchUrl(
+                'https://ahmedkhalilalsayed.github.io/TimeLock-Passwords-Web-Demo/',
+              ),
+              icon: SvgPicture.asset('assets/web.svg', width: 24, height: 24),
+            ),
           IconButton(
             onPressed: () {
               showAboutDialog(

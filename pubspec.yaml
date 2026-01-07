@@ -40,6 +40,8 @@ dependencies:
   flutter_windowmanager: ^0.2.0
   about: ^2.2.0
   flutter_launcher_icons: ^0.14.4
+  flutter_svg: ^2.0.10
+  url_launcher: ^6.2.5
 
 
 
@@ -64,6 +66,10 @@ dev_dependencies:
 flutter:
   assets:
     - assets/app_icon.png
+    - assets/windows.svg
+    - assets/linux.svg
+    - assets/web.svg
+    - assets/android.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
