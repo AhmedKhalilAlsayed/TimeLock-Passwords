@@ -1,6 +1,6 @@
-import 'package:TimeLockPassword/domain/domain_impl.dart';
-import 'package:TimeLockPassword/domain/domain_interface.dart';
-import 'package:TimeLockPassword/state_handler.dart';
+import 'package:timelockpassword/domain/domain_impl.dart';
+import 'package:timelockpassword/domain/domain_interface.dart';
+import 'package:timelockpassword/state_handler.dart';
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart';
 

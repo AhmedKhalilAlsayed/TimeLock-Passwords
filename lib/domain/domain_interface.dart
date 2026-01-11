@@ -1,5 +1,5 @@
-import 'package:TimeLockPassword/domain/domain_impl.dart';
-import 'package:TimeLockPassword/state_handler.dart';
+import 'package:timelockpassword/domain/domain_impl.dart';
+import 'package:timelockpassword/state_handler.dart';
 import 'package:encrypt/encrypt.dart';
 
 /// interface

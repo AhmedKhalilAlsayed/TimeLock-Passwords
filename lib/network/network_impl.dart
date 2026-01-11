@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:TimeLockPassword/domain/domain_constants.dart';
-import 'package:TimeLockPassword/network/network_interface.dart';
-import 'package:TimeLockPassword/state_handler.dart';
+import 'package:timelockpassword/domain/domain_constants.dart';
+import 'package:timelockpassword/network/network_interface.dart';
+import 'package:timelockpassword/state_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:ntp/ntp.dart';
 
@@ -45,7 +45,7 @@ class NetworkImpl extends NetworkInterface {
   Future<StateHandler<NetworkErrorState, DateTime>>
   getCurrentTimeByNTP() async {
     StateHandler<NetworkErrorState, DateTime> currentDateTimeHandler = await NTP
-        .now(timeout: Duration(seconds: 3))
+        .now(timeout: Duration(seconds: 60), )
         .then((value) async {
           return StateHandler(NetworkErrorState.success, value);
         })

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:TimeLockPassword/domain/domain_constants.dart';
-import 'package:TimeLockPassword/domain/domain_interface.dart';
-import 'package:TimeLockPassword/domain/models/delayed_pass_model.dart';
-import 'package:TimeLockPassword/domain/models/password.dart';
-import 'package:TimeLockPassword/network/network_impl.dart';
-import 'package:TimeLockPassword/network/network_interface.dart';
-import 'package:TimeLockPassword/state_handler.dart';
+import 'package:timelockpassword/domain/domain_constants.dart';
+import 'package:timelockpassword/domain/domain_interface.dart';
+import 'package:timelockpassword/domain/models/delayed_pass_model.dart';
+import 'package:timelockpassword/domain/models/password.dart';
+import 'package:timelockpassword/network/network_impl.dart';
+import 'package:timelockpassword/network/network_interface.dart';
+import 'package:timelockpassword/state_handler.dart';
 import 'package:encrypt/encrypt.dart';
 
 enum DomainErrorStates {

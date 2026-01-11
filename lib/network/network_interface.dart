@@ -1,5 +1,5 @@
-import 'package:TimeLockPassword/network/network_impl.dart';
-import 'package:TimeLockPassword/state_handler.dart';
+import 'package:timelockpassword/network/network_impl.dart';
+import 'package:timelockpassword/state_handler.dart';
 
 abstract class NetworkInterface {
   static final NetworkInterface _networkInterface = NetworkImpl();

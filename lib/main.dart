@@ -1,5 +1,5 @@
-import 'package:TimeLockPassword/presentation/presentation_constants.dart';
-import 'package:TimeLockPassword/presentation/welcome_view/welcome_view.dart';
+import 'package:timelockpassword/presentation/presentation_constants.dart';
+import 'package:timelockpassword/presentation/welcome_view/welcome_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

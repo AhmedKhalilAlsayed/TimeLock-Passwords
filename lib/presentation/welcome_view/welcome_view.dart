@@ -1,6 +1,6 @@
-import 'package:TimeLockPassword/domain/domain_impl.dart';
-import 'package:TimeLockPassword/domain/domain_interface.dart';
-import 'package:TimeLockPassword/presentation/presentation_constants.dart';
+import 'package:timelockpassword/domain/domain_impl.dart';
+import 'package:timelockpassword/domain/domain_interface.dart';
+import 'package:timelockpassword/presentation/presentation_constants.dart';
 import 'package:encrypt/encrypt.dart' deferred as encrypt_lib;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,12 +35,12 @@ class _WelcomeViewState extends State<WelcomeView> {
         actions: [
           if (kIsWeb) ...[
             const Text(
-              'The platform versions are unlimited!',
+              'These will be available when become stable',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 16),
             IconButton(
-              onPressed: () => _launchUrl('https://www.microsoft.com'),
+              onPressed: () {},
               icon: SvgPicture.asset(
                 'assets/windows.svg',
                 width: 24,
@@ -48,11 +48,11 @@ class _WelcomeViewState extends State<WelcomeView> {
               ),
             ),
             IconButton(
-              onPressed: () => _launchUrl('https://www.linux.org'),
+              onPressed: () {},
               icon: SvgPicture.asset('assets/linux.svg', width: 24, height: 24),
             ),
             IconButton(
-              onPressed: () => _launchUrl('https://www.android.com'),
+              onPressed: () {},
               icon: SvgPicture.asset(
                 'assets/android.svg',
                 width: 24,
@@ -94,8 +94,6 @@ class _WelcomeViewState extends State<WelcomeView> {
                   const SizedBox(height: 8),
                   const SelectableText(PresentationConstants.developerGmail),
                   const SelectableText(PresentationConstants.developerLinkedIn),
-                  const SizedBox(height: 8),
-                  const Text(PresentationConstants.contact),
                 ],
               );
             },
@@ -127,8 +125,7 @@ class _WelcomeViewState extends State<WelcomeView> {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight:
-              MediaQuery.of(context).size.height -
+          minHeight: MediaQuery.of(context).size.height -
               (Scaffold.of(context).appBarMaxHeight ?? 0) -
               MediaQuery.of(context).padding.top,
         ),
@@ -190,7 +187,7 @@ class _WelcomeInfo extends StatelessWidget {
           Icon(Icons.lock_clock, size: 80, color: colorScheme.primary),
           const SizedBox(height: 24),
           Text(
-            'Welcome to ${PresentationConstants.appName}',
+            'Welcome to ${PresentationConstants.appName} ${PresentationConstants.appVersion}',
             textAlign: TextAlign.center,
             style: textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
@@ -223,7 +220,7 @@ class _ActionButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _ActionCard(
-            title: 'Generate New Password ${PresentationConstants.appVersion}',
+            title: 'Generate New Password',
             icon: Icons.add_moderator,
             color: colorScheme.primary,
             onTap: () async {
@@ -284,21 +281,21 @@ class _ActionButtons extends StatelessWidget {
                             );
 
                             late StateHandler<DomainErrorStates, String>
-                            passHandler;
+                                passHandler;
 
                             await encrypt_lib.loadLibrary();
 
                             try {
                               passHandler = await DomainInterface.impl()
                                   .getPassFromHash(
-                                    encrypt_lib.Encrypted.fromBase64(hashInput),
-                                  )
+                                encrypt_lib.Encrypted.fromBase64(hashInput),
+                              )
                                   .onError((handleError, e) {
-                                    return StateHandler(
-                                      DomainErrorStates.failed,
-                                      e.toString(),
-                                    );
-                                  });
+                                return StateHandler(
+                                  DomainErrorStates.failed,
+                                  e.toString(),
+                                );
+                              });
                             } catch (e) {
                               passHandler = StateHandler(
                                 DomainErrorStates.failed,
@@ -314,16 +311,15 @@ class _ActionButtons extends StatelessWidget {
                                 break;
 
                               case DomainErrorStates
-                                  .pleaseWaitTheOpeningDateTime:
+                                    .pleaseWaitTheOpeningDateTime:
                                 textMessage =
                                     "${DomainErrorStates.pleaseWaitTheOpeningDateTime.name}: ${passHandler.value}";
                                 break;
 
                               case DomainErrorStates
-                                  .yourDeviceClockNotSyncedWithNetwork:
+                                    .yourDeviceClockNotSyncedWithNetwork:
                                 textMessage = DomainErrorStates
-                                    .yourDeviceClockNotSyncedWithNetwork
-                                    .name;
+                                    .yourDeviceClockNotSyncedWithNetwork.name;
                                 break;
                               default:
                                 textMessage =
