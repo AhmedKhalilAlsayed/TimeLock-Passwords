@@ -1,7 +1,7 @@
 class PresentationConstants {
   static const String appName = 'TimeLock Passwords';
 
-  static const String appVersion = 'V.2.0';
+  static const String appVersion = 'V.2.0.0';
 
   static const String howItWorks = 'How it works';
 
