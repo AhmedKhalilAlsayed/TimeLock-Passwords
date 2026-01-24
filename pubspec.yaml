@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^2.0.10
   url_launcher: ^6.2.5
   opentelemetry: ^0.18.10
+  http_parser: ^4.1.2
 
 
 

@@ -110,7 +110,7 @@ class DomainImpl extends DomainInterface {
         if (fromHostHttpResult.state == NetworkErrorState.success) {
           currentDateTimeHandler.state = DomainErrorStates.success;
           currentDateTimeHandler.value = fromHostHttpResult.value;
-          print('Current time from !');
+          print('Current time from HTTP');
         } else {
           // nothing, go to Fallback Server API
         }
@@ -126,7 +126,7 @@ class DomainImpl extends DomainInterface {
       }
 
       if (currentDateTimeHandler.state != DomainErrorStates.success) {
-        // Fallback to Server API 
+        // Fallback to Server API
         final apiResultHandler = await networkInterface.getCurrentTimeByAPI();
         if (apiResultHandler.state == NetworkErrorState.success) {
           currentDateTimeHandler.state = DomainErrorStates.success;
