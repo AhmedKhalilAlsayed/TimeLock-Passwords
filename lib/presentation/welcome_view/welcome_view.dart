@@ -305,28 +305,32 @@ class _ActionButtons extends StatelessWidget {
                               );
                             }
 
-                            String textMessage = "";
+                            String textMessage1 = "";
+                            String textMessage2 = "";
                             switch (passHandler.state) {
                               case DomainErrorStates.success:
-                                textMessage =
-                                    "The extracted password: ${passHandler.value}";
+                                textMessage1 = "The extracted password: ";
+                                textMessage2 = "${passHandler.value}";
                                 break;
 
                               case DomainErrorStates
                                   .pleaseWaitTheOpeningDateTime:
-                                textMessage =
-                                    "${DomainErrorStates.pleaseWaitTheOpeningDateTime.name}: ${passHandler.value}";
+                                textMessage1 =
+                                    "${DomainErrorStates.pleaseWaitTheOpeningDateTime.name}: ";
+                                textMessage2 = "${passHandler.value}";
                                 break;
 
                               case DomainErrorStates
                                   .yourDeviceClockNotSyncedWithNetwork:
-                                textMessage = DomainErrorStates
+                                textMessage1 = DomainErrorStates
                                     .yourDeviceClockNotSyncedWithNetwork
                                     .name;
+                                textMessage2 = "";
                                 break;
                               default:
-                                textMessage =
-                                    "Undefined error, may be the network please! or ${passHandler.value}";
+                                textMessage1 =
+                                    "Undefined error, may be the network please! or ";
+                                textMessage2 = "${passHandler.value}";
                                 break;
                             }
 
@@ -339,9 +343,14 @@ class _ActionButtons extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: const Text('Retrieved Password'),
-                                  content: SelectableText(
-                                    textMessage,
-                                    textAlign: TextAlign.center,
+                                  content: Row(
+                                    children: [
+                                      Text(textMessage1),
+                                      SelectableText(
+                                        textMessage2,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
                                   actions: <Widget>[
                                     TextButton(
