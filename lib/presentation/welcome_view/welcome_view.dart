@@ -125,7 +125,8 @@ class _WelcomeViewState extends State<WelcomeView> {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight: MediaQuery.of(context).size.height -
+          minHeight:
+              MediaQuery.of(context).size.height -
               (Scaffold.of(context).appBarMaxHeight ?? 0) -
               MediaQuery.of(context).padding.top,
         ),
@@ -241,6 +242,7 @@ class _ActionButtons extends StatelessWidget {
             color: colorScheme.secondary,
             onTap: () {
               print('Navigate to Get Password from Hash');
+              print('Date.now: ${DateTime.now()}');
 
               showDialog(
                 context: context,
@@ -281,21 +283,21 @@ class _ActionButtons extends StatelessWidget {
                             );
 
                             late StateHandler<DomainErrorStates, String>
-                                passHandler;
+                            passHandler;
 
                             await encrypt_lib.loadLibrary();
 
                             try {
                               passHandler = await DomainInterface.impl()
                                   .getPassFromHash(
-                                encrypt_lib.Encrypted.fromBase64(hashInput),
-                              )
+                                    encrypt_lib.Encrypted.fromBase64(hashInput),
+                                  )
                                   .onError((handleError, e) {
-                                return StateHandler(
-                                  DomainErrorStates.failed,
-                                  e.toString(),
-                                );
-                              });
+                                    return StateHandler(
+                                      DomainErrorStates.failed,
+                                      e.toString(),
+                                    );
+                                  });
                             } catch (e) {
                               passHandler = StateHandler(
                                 DomainErrorStates.failed,
@@ -311,15 +313,16 @@ class _ActionButtons extends StatelessWidget {
                                 break;
 
                               case DomainErrorStates
-                                    .pleaseWaitTheOpeningDateTime:
+                                  .pleaseWaitTheOpeningDateTime:
                                 textMessage =
                                     "${DomainErrorStates.pleaseWaitTheOpeningDateTime.name}: ${passHandler.value}";
                                 break;
 
                               case DomainErrorStates
-                                    .yourDeviceClockNotSyncedWithNetwork:
+                                  .yourDeviceClockNotSyncedWithNetwork:
                                 textMessage = DomainErrorStates
-                                    .yourDeviceClockNotSyncedWithNetwork.name;
+                                    .yourDeviceClockNotSyncedWithNetwork
+                                    .name;
                                 break;
                               default:
                                 textMessage =

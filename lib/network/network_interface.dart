@@ -11,4 +11,10 @@ abstract class NetworkInterface {
   Future<StateHandler<NetworkErrorState, DateTime>> getCurrentTimeByNTP();
 
   Future<StateHandler<NetworkErrorState, DateTime?>> getCurrentTimeByAPI();
+
+  Future<StateHandler<NetworkErrorState, DateTime?>>
+  getCurrentTimeByPerfomanceAPI();
+
+  Future<StateHandler<NetworkErrorState, DateTime?>>
+  getCurrentTimeFromDeployHTTP();
 }

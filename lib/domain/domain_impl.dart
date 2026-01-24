@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' hide Key;
 import 'package:timelockpassword/domain/domain_constants.dart';
 import 'package:timelockpassword/domain/domain_interface.dart';
 import 'package:timelockpassword/domain/models/delayed_pass_model.dart';
@@ -101,19 +102,36 @@ class DomainImpl extends DomainInterface {
         null,
       );
 
-      // TODO v+: validate the device's time
-
-      // Try fetching time from NTP first
-      final ntpResultHandler = await networkInterface.getCurrentTimeByNTP();
-      if (ntpResultHandler.state == NetworkErrorState.success) {
-        currentDateTimeHandler.state = DomainErrorStates.success;
-        currentDateTimeHandler.value = ntpResultHandler.value;
+      // check if it is Web or OS
+      if (kIsWeb) {
+        // Web
+        final fromHostHttpResult = await networkInterface
+            .getCurrentTimeFromDeployHTTP();
+        if (fromHostHttpResult.state == NetworkErrorState.success) {
+          currentDateTimeHandler.state = DomainErrorStates.success;
+          currentDateTimeHandler.value = fromHostHttpResult.value;
+          print('Current time from !');
+        } else {
+          // nothing, go to Fallback Server API
+        }
       } else {
-        // Fallback to API if NTP fails or is out of sync
+        // not web, OS
+        // Try fetching time from NTP first
+        final ntpResultHandler = await networkInterface.getCurrentTimeByNTP();
+        if (ntpResultHandler.state == NetworkErrorState.success) {
+          currentDateTimeHandler.state = DomainErrorStates.success;
+          currentDateTimeHandler.value = ntpResultHandler.value;
+          print('Current time from OS NTP');
+        }
+      }
+
+      if (currentDateTimeHandler.state != DomainErrorStates.success) {
+        // Fallback to Server API 
         final apiResultHandler = await networkInterface.getCurrentTimeByAPI();
         if (apiResultHandler.state == NetworkErrorState.success) {
           currentDateTimeHandler.state = DomainErrorStates.success;
           currentDateTimeHandler.value = apiResultHandler.value;
+          print('Current time from Server API');
         } else if (apiResultHandler.state != NetworkErrorState.success) {
           currentDateTimeHandler.state = DomainErrorStates.checkYourNetwork;
         } else {
@@ -124,6 +142,8 @@ class DomainImpl extends DomainInterface {
 
       // Check openTime with current time
       if (currentDateTimeHandler.state == DomainErrorStates.success) {
+        print('Current time ${currentDateTimeHandler.value}');
+
         if (currentDateTimeHandler.value!.isAfter(
           delayedPassModel.openDateTime!,
         )) {
