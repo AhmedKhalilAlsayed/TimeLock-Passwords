@@ -35,30 +35,32 @@ class _WelcomeViewState extends State<WelcomeView> {
         actions: [
           if (kIsWeb) ...[
             const Text(
-              'These will be available when become stable',
+              'Other platforms: ',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 16),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                'assets/windows.svg',
-                width: 24,
-                height: 24,
+            if (false)
+              IconButton(
+                onPressed: () {},
+                icon: SvgPicture.asset(
+                  'assets/windows.svg',
+                  width: 24,
+                  height: 24,
+                ),
               ),
-            ),
             IconButton(
-              onPressed: () {},
+              onPressed: () => _launchUrl('https://drive.google.com/file/d/1VsGCOlpUCw90DjzY6rhNWP_8xDw52or1/view?usp=sharing'),
               icon: SvgPicture.asset('assets/linux.svg', width: 24, height: 24),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                'assets/android.svg',
-                width: 24,
-                height: 24,
+            if (false)
+              IconButton(
+                onPressed: () {},
+                icon: SvgPicture.asset(
+                  'assets/android.svg',
+                  width: 24,
+                  height: 24,
+                ),
               ),
-            ),
           ] else
             IconButton(
               onPressed: () => _launchUrl(
@@ -94,6 +96,8 @@ class _WelcomeViewState extends State<WelcomeView> {
                   const SizedBox(height: 8),
                   const SelectableText(PresentationConstants.developerGmail),
                   const SelectableText(PresentationConstants.developerLinkedIn),
+                  const SizedBox(height: 8),
+                  const SelectableText(PresentationConstants.supportWallet),
                 ],
               );
             },
